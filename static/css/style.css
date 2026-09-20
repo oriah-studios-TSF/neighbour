@@ -5,8 +5,13 @@
     box-sizing: border-box
 }
 
+
+/* -----------------------------------------
+Authentication
+-----------------------------------------*/
+
 .create-account-container {
-    margin: 10px 20px;
+    padding: 10px 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -61,6 +66,19 @@
 .form-input input {
     width: 100%;
     border: none;
+    background: none;
+    outline: none;
+}
+
+.form-input .fas {
+    color: #0438ff;
+}
+
+.form-input select {
+    width: 100%;
+    border: none;
+    background: none;
+    outline: none;
 }
 
 .terms {
@@ -71,7 +89,19 @@
 .terms a {
     color: #0438ff;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+}
+
+.already {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 10pt;
+}
+
+.already a {
+    color: #0438ff;
+    font-weight: 600;
+    text-decoration: none;
 }
 
 .form-input {
@@ -94,4 +124,146 @@
 
 .submitBtn:active {
     transform: translateY(-5px);
+}
+
+/* -----------------------------------------
+Main Page (index)
+-----------------------------------------*/
+.main-container {
+    height: 100dvh;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #0438ff;
+    border-radius: 20px;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+.navigation-button .fas {
+    font-size: 13pt;
+}
+
+.navigation-button button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    width: 80px;
+    border: none;
+    border-radius: 20px;
+    background: none;
+    font-size: 9pt;
+    color: white;
+    padding: 10px 15px;
+    transition: 0.5s;
+}
+
+.navigation-button button:hover {
+    background-color: white;
+    color: #0438ff;
+}
+
+.navigation-button button:active {
+    background-color: white;
+    color: #0438ff;
+    transform: translateY(-5px);
+}
+
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 20px 20px;
+    margin: 20px 20px;
+    
+}
+
+.alert-code {
+    font-weight: bold;
+    font-size: 10pt;
+    text-transform: uppercase;
+}
+
+.alert-code.safe {
+    color: rgb(0, 199, 0);
+}
+
+.home-header .logo {
+    width: 150px;
+}
+
+.home-hero {
+    padding: 0 20px;
+    padding-bottom: 20px;
+}
+
+.home-hero h1 {
+    font-size: 20pt;
+    font-weight: 500;
+    color: #0438ff;
+}
+
+.home-hero p {
+    font-size: 9pt;
+    color: gray;
+}
+
+.home-hero .community-enrolled {
+    font-weight: 500;
+    margin-top: 10px;
+    text-transform: uppercase;
+    color: #0438ff;
+    font-size: 13pt;
+}
+
+.home-panic-alert {
+    padding: 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.home-panic-alert h1 {
+    color: #0438ff;
+    padding-bottom: 10px;
+}
+
+.home-panic-alert p {
+    color: gray;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.panicBtn {
+    background-color: rgb(180, 0, 0);
+    color: white;
+    border: none;
+    border: 5px solid rgb(243, 243, 243);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 250px;
+    font-size: 60pt;
+    transition: 0.5s;
+}
+
+.panicBtn:active {
+    background-color: red;
+    transform: scale(0.8);
 }
