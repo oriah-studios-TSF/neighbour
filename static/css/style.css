@@ -63,6 +63,17 @@
     border: none;
 }
 
+.terms {
+    font-size: 10pt;
+    color: gray;
+}
+
+.terms a {
+    color: #0438ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 .form-input {
     padding: 10px 15px;
     border: 2px solid grey;
