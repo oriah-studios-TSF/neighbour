@@ -60,7 +60,27 @@
 
 .form-input input {
     width: 100%;
+    border: none;
+}
+
+.form-input {
     padding: 10px 15px;
+    border: 2px solid grey;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     border-radius: 10px;
-    border: 2px solid gray;
+}
+
+.submitBtn {
+    padding: 15px 20px;
+    background-color: #0438ff;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.submitBtn:active {
+    transform: translateY(-5px);
 }
