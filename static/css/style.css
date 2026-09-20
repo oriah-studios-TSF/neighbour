@@ -166,6 +166,19 @@ Main Page (index)
     transition: 0.5s;
 }
 
+#home {
+    display: block;
+}
+
+#chat, #alerts, #profile {
+    display: none;
+}
+
+.navigation-button button.active {
+    background-color: white;
+    color: #0438ff;
+}
+
 .navigation-button button:hover {
     background-color: white;
     color: #0438ff;
@@ -181,11 +194,7 @@ Main Page (index)
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
     padding: 20px 20px;
-    margin: 20px 20px;
-    
 }
 
 .alert-code {
@@ -202,37 +211,14 @@ Main Page (index)
     width: 150px;
 }
 
-.home-hero {
-    padding: 0 20px;
-    padding-bottom: 20px;
-}
-
-.home-hero h1 {
-    font-size: 20pt;
-    font-weight: 500;
-    color: #0438ff;
-}
-
-.home-hero p {
-    font-size: 9pt;
-    color: gray;
-}
-
-.home-hero .community-enrolled {
-    font-weight: 500;
-    margin-top: 10px;
-    text-transform: uppercase;
-    color: #0438ff;
-    font-size: 13pt;
-}
-
 .home-panic-alert {
     padding: 20px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 20px;
+    height: 100%;
+    gap: 50px;
     text-align: center;
 }
 
@@ -257,8 +243,8 @@ Main Page (index)
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 250px;
-    width: 250px;
+    height: 300px;
+    width: 300px;
     font-size: 60pt;
     transition: 0.5s;
 }
@@ -266,4 +252,78 @@ Main Page (index)
 .panicBtn:active {
     background-color: red;
     transform: scale(0.8);
+}
+
+/* -----------------------------------------
+Main Page (chat)
+-----------------------------------------*/
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+.chat-header h2 {
+    font-size: 15pt;
+    font-weight: 500;
+    color: #0438ff;
+}
+
+.chat-header span {
+    font-weight: 500;
+    font-size: 9pt;
+    color: gray;
+}
+
+.chat-panel {
+    margin: 0 20px;
+    height: 79dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.chat-input {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 20px;
+    padding: 20px 20px;
+}
+
+.chat-input input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    font-size: 9pt;
+    color: black;
+    overflow-y: auto;
+}
+
+.chat-input button {
+    background: none;
+    border: none;
+    font-size: 9pt;
+    background-color: #0438ff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.chat-input button:active {
+    transform: translateY(-5px);
 }
