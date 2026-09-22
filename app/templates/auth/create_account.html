@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>neighbour - Create an Account</title>
     <script src="https://kit.fontawesome.com/08c0396a01.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="create-account-container">
         <div class="create-account-form">
-            <img class="logo" src="/static/images/neighbour_logo.png" alt="">
+            <img class="logo" src="{{ url_for('static', filename='images/neighbour_logo.png') }}" alt="">
             <div class="form-header">
                 <h2><i class="fas fa-user"></i> Create Your Account</h2>
                 <p>Please fill in the form below in order to create your account.</p>

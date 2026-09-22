@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>neighbour - Home</title>
     <script src="https://kit.fontawesome.com/08c0396a01.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="main-container">
         <section class="home" id="home">
             <div class="home-header">
-                <img class="logo" src="/static/images/neighbour_logo.png" alt="neighbour Logo">
+                <img class="logo" src="{{ url_for('static', filename='images/neighbour_logo.png') }}" alt="neighbour Logo">
                 <span class="alert-code safe">C-Green</span>
             </div>
 
@@ -66,6 +66,6 @@
         </div>
     </div>
 
-    <script src="/static/js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html> 
