@@ -1,7 +1,6 @@
 from flask import Flask
 from config import Config
-from app.extensions import db, migrate
-from app import models
+from app.extensions import db, migrate, socketio, login_manager
 from app.models import User
 from flask_login import LoginManager
 
@@ -11,8 +10,8 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+    socketio.init_app(app)
 
-    login_manager = LoginManager()
     login_manager.login_view = 'auth.access_account'
     login_manager.init_app(app)
 
