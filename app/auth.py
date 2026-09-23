@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
+from flask_login import login_user
 from app.extensions import db
 from app.models import User, Community
 from app.forms import RegistrationForm, LoginForm
@@ -30,8 +31,10 @@ def access_account():
         user = User.query.filter_by(email=form.email.data).first()
         
         if user and user.check_password(form.password.data):
+            login_user(user)
             flash('You have logged in successfully.', 'success')
             return redirect(url_for('main.index'))
         else:
             flash('Invalid email or password.', 'danger')
+            
     return render_template('auth/access_account.html', form=form)

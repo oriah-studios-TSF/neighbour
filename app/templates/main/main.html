@@ -31,7 +31,15 @@
             </div>
 
             <div class="chat-panel">
-                <div class="chat-messages"></div>
+                <div class="chat-messages">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message.user.name }}: {{ message.content }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>No messages yet.</p>
+                    {% endif %}
+                </div>
                 <div class="chat-input">
                     <input type="text" placeholder="Type your message here">
                     <button><i class="fas fa-paper-plane"></i></button>

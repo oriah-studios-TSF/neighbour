@@ -7,7 +7,7 @@ class RegistrationForm(FlaskForm):
     full_name = StringField('Full Name *', validators=[DataRequired(), Length(min=2, max=100)])
     email = StringField('Email Address *', validators=[DataRequired(), Email()])
     phone_number = StringField('Phone Number *', validators=[DataRequired(), Regexp(r'^(\+27|0)[6-8][0-9]{8}$', message='Enter a valid South African phone number.')])
-    community_id = SelectField('Neighborhood *', coerce=int, validators=[DataRequired()])
+    community_id = SelectField('Neighbourhood *', coerce=int, validators=[DataRequired()])
     password = PasswordField('Password *', validators=[DataRequired(), Length(min=8, max=128)])
     confirm_password = PasswordField('Confirm Password *', validators=[DataRequired(), Length(min=8, max=128), EqualTo('password', message='Passwords must match.')])
     submit = SubmitField('Create Account')
