@@ -62,13 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const userElement = document.createElement('span');
         userElement.classList.add('chat-user');
-        userElement.textContent = `${message.user}`;
+
+        if (message.user === currentUser) {
+            userElement.classList.add('own-message');
+            userElement.textContent = 'You';
+        } else {
+            userElement.textContent = message.user;
+        }
 
         messageElement.appendChild(userElement);
 
         const messageContent = document.createElement('span');
         messageContent.classList.add('chat-message-content');
-        messageContent.textContent = `${message.content}`;
+        messageContent.textContent = message.content;
 
         messageElement.appendChild(messageContent);
 

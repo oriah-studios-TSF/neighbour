@@ -316,7 +316,7 @@ Main Page (chat)
 
 .chat-panel {
     margin: 0 20px;
-    height: 79dvh;
+    height: 80dvh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -327,26 +327,42 @@ Main Page (chat)
 .chat-messages {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 10px 20px;
+    padding: 10px 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.chat-messages::-webkit-scrollbar {
+    display: none;
 }
 
 .chat-message {
     display: flex;
     flex-direction: column;
     gap: 3px;
+    background-color: #ececec;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .chat-user {
     font-size: 8pt;
-    color: gray;
+    color: #ff9f00;
+    font-weight: bold;
+}
+
+.own-message {
+    color: #0438ff !important;
 }
 
 .chat-message-content {
-    color: #0438ff;
-    font-size: 9pt;
+    font-size: 8.5pt;
+    color: black;
+}
+
+.own-message {
+    color: #0438ff !important;
 }
 
 .chat-message-timestamp {

@@ -66,6 +66,10 @@
         </div>
     </div>
 
+    <script>
+        const currentUser = '{{ current_user.name }}';
+    </script>
+
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
