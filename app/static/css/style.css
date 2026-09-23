@@ -331,7 +331,27 @@ Main Page (chat)
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.chat-message {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.chat-user {
+    font-size: 8pt;
+    color: gray;
+}
+
+.chat-message-content {
+    color: #0438ff;
     font-size: 9pt;
+}
+
+.chat-message-timestamp {
+    font-size: 8pt;
+    color: gray;
 }
 
 .chat-input {

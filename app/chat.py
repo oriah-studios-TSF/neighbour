@@ -45,3 +45,22 @@ def handle_send_message(data):
         'user': current_user.name,
         'created_at': message.created_at.isoformat()
     }, to=room)
+
+@socketio.on('request_chat_history')
+def handle_chat_history():
+    if not current_user.is_authenticated:
+        return
+
+
+    messages = Message.query.filter_by(community_id=current_user.community_id).order_by(Message.created_at.asc()).all()
+
+    emit('chat_history', [
+        {
+            'id': message.id,
+            'content': message.content,
+            'user': message.user.name,
+            'created_at': message.created_at.isoformat()
+        }
+        
+        for message in messages
+    ])

@@ -57,11 +57,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendMessageBtn = document.getElementById('sendMessageBtn');
 
     function addMessage(message) {
-        const messageElement = document.createElement('p');
-        messageElement.textContent = `${message.user}: ${message.content}`;
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message');
+
+        const userElement = document.createElement('span');
+        userElement.classList.add('chat-user');
+        userElement.textContent = `${message.user}`;
+
+        messageElement.appendChild(userElement);
+
+        const messageContent = document.createElement('span');
+        messageContent.classList.add('chat-message-content');
+        messageContent.textContent = `${message.content}`;
+
+        messageElement.appendChild(messageContent);
+
 
         const timestamp = document.createElement('span');
-        timestamp.textContent = `${message.created_at}`;
+        const date = new Date(message.created_at + 'Z');
+
+        timestamp.classList.add('chat-message-timestamp');
+        timestamp.textContent = date.toLocaleString([], {hour: '2-digit', minute: '2-digit'}); // With proper date format and date
 
         messageElement.appendChild(timestamp);
         chatMessages.appendChild(messageElement);
@@ -79,14 +95,35 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.emit('send_message', {
             content: content,
         });
-
+        
         chatInput.value = '';
         chatInput.focus();
+
     });
 
-    socket.on('message', (message) => {
+    chatInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            sendMessageBtn.click();
+        }
+    });
+
+    socket.on('chat_history', (messages) => {
+        chatMessages.innerHTML = '';
+
+        messages.forEach(message => {
+            addMessage(message);
+        });
+    });
+
+    socket.emit('request_chat_history');
+    
+
+    socket.on('new_message', (message) => {
         addMessage(message);
     });
+
+
+
 
 });
 
