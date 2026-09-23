@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template
+from flask_login import login_required
 
 main = Blueprint('main', __name__)
 
 @main.route('/')
-def home():
+@login_required
+def index():
         return render_template('main/main.html')
