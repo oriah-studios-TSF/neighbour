@@ -31,18 +31,10 @@
             </div>
 
             <div class="chat-panel">
-                <div class="chat-messages">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <p>{{ message.user.name }}: {{ message.content }}</p>
-                        {% endfor %}
-                    {% else %}
-                        <p>No messages yet.</p>
-                    {% endif %}
-                </div>
+                <div class="chat-messages" id="chatMessages"></div>
                 <div class="chat-input">
-                    <input type="text" placeholder="Type your message here">
-                    <button><i class="fas fa-paper-plane"></i></button>
+                    <input type="text" id="chatInput" placeholder="Type your message here">
+                    <button type="button" id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
         </section>
@@ -74,6 +66,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html> 

@@ -49,5 +49,44 @@ document.addEventListener('DOMContentLoaded', () => {
         activateSection(buttons.profileBtn, sections.profile);
     });
 
+
+    // Socket
+    const socket = io();
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+    function addMessage(message) {
+        const messageElement = document.createElement('p');
+        messageElement.textContent = `${message.user}: ${message.content}`;
+
+        const timestamp = document.createElement('span');
+        timestamp.textContent = `${message.created_at}`;
+
+        messageElement.appendChild(timestamp);
+        chatMessages.appendChild(messageElement);
+
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    sendMessageBtn.addEventListener('click', () => {
+        const content = chatInput.value.trim();
+
+        if (!content) {
+            return;
+        }
+
+        socket.emit('send_message', {
+            content: content,
+        });
+
+        chatInput.value = '';
+        chatInput.focus();
+    });
+
+    socket.on('message', (message) => {
+        addMessage(message);
+    });
+
 });
 
