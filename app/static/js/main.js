@@ -13,6 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
         alerts: document.getElementById('alerts'),
         profile: document.getElementById('profile')
     };
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('Service worker registered:', registration.scope);
+            })
+            .catch(error => {
+                console.error('Service worker registration failed:', error);
+            });
+
+    }
     
     // Reusable function
     function activateSection(activeBtn, activeSection) {
@@ -126,6 +137,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('new_message', (message) => {
         addMessage(message);
+    });
+
+    // Notifications
+    const enableNotificationsBtn = document.getElementById('enableNotificationsBtn');
+    const notificationStatus = document.getElementById('notificationStatus');
+
+    enableNotificationsBtn.addEventListener('click', async () => {
+
+        if (!('Notification' in window)) {
+            notificationStatus.textContent = 'This browser does not support notifications.';
+            return;
+        }
+
+    
+        const permission = await Notification.requestPermission();
+
+
+        if (permission === 'granted') {
+            notificationStatus.textContent = 'Notifications enabled.';
+
+            const registration = await navigator.serviceWorker.ready;
+
+            await registration.showNotification('Neighbour', {
+                body: 'You have a new notification.',
+                icon: '/static/images/neighbour_logo.png',
+                badge: '/static/images/neighbour_logo.png',
+            });
+        } else if (permission === 'denied') {
+            notificationStatus.textContent = 'Notifications denied.';
+        } else {
+            notificationStatus.textContent = 'Notification permssion was not granted.';
+        }
     });
 
 

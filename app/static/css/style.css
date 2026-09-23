@@ -359,6 +359,8 @@ Main Page (chat)
 .chat-message-content {
     font-size: 8.5pt;
     color: black;
+    overflow-wrap: anywhere;
+    max-width: 100%;
 }
 
 .own-message {
