@@ -143,6 +143,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const enableNotificationsBtn = document.getElementById('enableNotificationsBtn');
     const notificationStatus = document.getElementById('notificationStatus');
 
+    function urlBase64ToUint8Array(base64String) {
+        const paading = '='.repeat((4 - (base64String.length % 4)) % 4);
+        const base64 = (base64String + paading).replace(/_/g, '/').replace(/-/g, '+');
+
+        const rawData = window.atob(base64);
+
+        return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)));
+        
+    }
+
     enableNotificationsBtn.addEventListener('click', async () => {
 
         if (!('Notification' in window)) {
@@ -155,15 +165,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         if (permission === 'granted') {
-            notificationStatus.textContent = 'Notifications enabled.';
+            notificationStatus.textContent = 'Seeting up notifications...';
 
-            const registration = await navigator.serviceWorker.ready;
+            try {
+                const registration = await navigator.serviceWorker.ready;
 
-            await registration.showNotification('Neighbour', {
-                body: 'You have a new notification.',
-                icon: '/static/images/neighbour_logo.png',
-                badge: '/static/images/neighbour_logo.png',
-            });
+                const response = await fetch('/api/push/public-key');
+                const data = await response.json();
+
+
+                const subscription = await registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: urlBase64ToUint8Array(data.publicKey)
+                });
+
+                console.log('Subscription:', subscription);
+
+                const saveResponse = await fetch('/api/push/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        subscription: subscription.toJSON()
+                    })
+                });
+
+                const saveData = await saveResponse.json();
+
+                console.log('Subscription saved:', saveData);
+
+
+                notificationStatus.textContent = 'Notifications enabled.';
+            } catch (error) {
+                console.error('Error setting up notifications:', error);
+                notificationStatus.textContent = 'Error setting up notifications.';
+                
+            }
+
         } else if (permission === 'denied') {
             notificationStatus.textContent = 'Notifications denied.';
         } else {
