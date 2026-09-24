@@ -78,7 +78,7 @@ def handle_send_message(data):
         }
 
         payload = {
-            'title': current_user.name,
+            'title': 'neighbour',
             'body': f'{current_user.name}: {content}',
             'url': '/'
         }

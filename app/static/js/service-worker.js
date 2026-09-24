@@ -16,8 +16,8 @@ self.addEventListener('push', event => {
     event.waitUntil(
         self.registration.showNotification('Neighbour', {
             body: data.body || 'Test notification received.',
-            icon: '/static/images/neighbour_logo.png',
-            badge: '/static/images/neighbour_logo.png'
+            icon: '/static/images/neighbour_logo_badge.png',
+            badge: '/static/images/neighbour_logo_badge.png'
         }).then(() => {
             console.log('Neighbour notification displayed');
         }).catch(error => {
