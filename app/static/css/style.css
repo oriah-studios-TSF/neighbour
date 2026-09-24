@@ -191,6 +191,7 @@ Main Page (index)
 .navigation-button button {
     display: flex;
     flex-direction: column;
+    position: relative;
     justify-content: center;
     align-items: center;
     gap: 2px;
@@ -361,6 +362,23 @@ Main Page (chat)
     color: black;
     overflow-wrap: anywhere;
     max-width: 100%;
+}
+
+#unreadMessages {
+    position: absolute;
+    top: 2px;
+    right: 16px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8pt;
+    font-weight: bold;
+
 }
 
 .own-message {

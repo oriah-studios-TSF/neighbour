@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     buttons.alertBtn.addEventListener('click', () => {
         activateSection(buttons.alertBtn, sections.alerts);
+        unreadMessagesCount = 0;
+        updateUnreadMessagesCount();
     });
 
     buttons.profileBtn.addEventListener('click', () => {
@@ -62,10 +64,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Socket
-    const socket = io();
+    const socket = io({
+        transports: ['polling']
+    });
+    let unreadMessagesCount = 0;
+    const unreadMessages = document.getElementById('unreadMessages');
+    const onlineUsers = document.getElementById('onlineUsers');
     const chatMessages = document.getElementById('chatMessages');
     const chatInput = document.getElementById('chatInput');
     const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+    unreadMessages.style.display = 'none';
+
+    function updateUnreadMessagesCount() {
+        unreadMessages.textContent = unreadMessagesCount;
+
+        if (unreadMessagesCount > 0) {
+            unreadMessages.style.display = 'block';
+        } else {
+            unreadMessages.style.display = 'none';
+        }
+    }
+
+    chatBtn.addEventListener('click', () => {
+        unreadMessagesCount = 0;
+        updateUnreadMessagesCount();
+    });
 
     function addMessage(message) {
         const messageElement = document.createElement('div');
@@ -94,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const date = new Date(message.created_at + 'Z');
 
         timestamp.classList.add('chat-message-timestamp');
-        timestamp.textContent = date.toLocaleString([], {hour: '2-digit', minute: '2-digit'}); // With proper date format and date
+        timestamp.textContent = date.toLocaleString('en-ZA', {day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'}); // With proper date format and date
 
         messageElement.appendChild(timestamp);
         chatMessages.appendChild(messageElement);
@@ -133,10 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.emit('request_chat_history');
-    
+
+    socket.on('online_users', (data) => {
+        onlineUsers.textContent = `${data.count} members online`;
+    });
 
     socket.on('new_message', (message) => {
         addMessage(message);
+
+        if (message.user !== currentUser) {
+           unreadMessagesCount++;
+           updateUnreadMessagesCount();
+        }
     });
 
     // Notifications

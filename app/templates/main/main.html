@@ -27,7 +27,7 @@
         <section id="chat" class="chat">
             <div class="chat-header">
                 <h2><i class="fas fa-message"></i> Community Chat</h2>
-                <span>20 users online</span>
+                <span id="onlineUsers"></span>
             </div>
 
             <div class="chat-panel">
@@ -50,6 +50,9 @@
                 <button type="button" id="enableNotificationsBtn"><i class="fas fa-bell"></i> Enable Notifications</button>
                 <p id="notificationStatus"></p>
             </div>
+            <div class="logout">
+                <a href="{{ url_for('auth.logout') }}">Logout</a>
+            </div>
         </section>
 
         <div class="navigation">
@@ -58,7 +61,7 @@
             </div>
 
             <div class="navigation-button">
-                <button id="chatBtn" type="button"><i class="fas fa-message"></i> Chat</button>
+                <button id="chatBtn" type="button"><i class="fas fa-message"></i> Chat <span id="unreadMessages"></span></button>
             </div>
 
             <div class="navigation-button">

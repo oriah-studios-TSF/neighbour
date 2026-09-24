@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from app.extensions import db
 from app.models import User, Community
 from app.forms import RegistrationForm, LoginForm
@@ -38,3 +38,9 @@ def access_account():
             flash('Invalid email or password.', 'danger')
             
     return render_template('auth/access_account.html', form=form)
+
+@auth.route('/logout')
+def logout():
+    logout_user()
+    flash('You have logged out successfully.', 'success')
+    return redirect(url_for('auth.access_account'))
