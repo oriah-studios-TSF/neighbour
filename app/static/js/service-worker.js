@@ -1,6 +1,28 @@
+const CACHE_NAME = 'neighbour-v1';
+
+const STATIC_ASSETS = [
+    '/static/manifest.json',
+    '/static/css/style.css',
+    '/static/js/main.js',
+    '/static/js/app.js',
+];
+
 self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(async cache => {
+            for (const asset of STATIC_ASSETS) {
+                const response = await fetch(asset);
+
+                if (response.ok) {
+                    await cache.put(asset, response);
+                }
+            }
+        })
+    )
+
     self.skipWaiting();
 });
+
 
 self.addEventListener('activate', event => {
     event.waitUntil(self.clients.claim());
